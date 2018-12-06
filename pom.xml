@@ -22,7 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<basedir>C:/spring/springboot-recipe</basedir>
+		<it.skip>false</it.skip>
 	</properties>
 
 	<dependencies>
@@ -62,9 +62,29 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+		      <groupId>org.springframework.boot</groupId>
+		      <artifactId>spring-boot-maven-plugin</artifactId>
+		      <executions>
+		        <execution>
+		          <id>pre-integration-test</id>
+		          <goals>
+		            <goal>start</goal>
+		          </goals>
+		          <configuration>
+		            <skip>${it.skip}</skip>
+		          </configuration>
+		        </execution>
+		        <execution>
+		          <id>post-integration-test</id>
+		          <goals>
+		            <goal>stop</goal>
+		          </goals>
+		          <configuration>
+		            <skip>${it.skip}</skip>
+		          </configuration>
+		        </execution>
+		      </executions>
+		    </plugin>
 			<plugin>
 	            <groupId>org.apache.maven.plugins</groupId>
 	            <artifactId>maven-surefire-plugin</artifactId>
@@ -78,7 +98,10 @@
 				<configuration>
 					<includes>
 						<include>**/*IT.java</include>
-					</includes>					
+					</includes>	
+					<configuration>
+		            <skip>${it.skip}</skip>
+		          </configuration>				
 				</configuration>
 				<executions>
 					<execution>
