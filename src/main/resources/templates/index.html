@@ -5,12 +5,14 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
 integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
-crossorigin="anonymous">
+crossorigin="anonymous" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+
+<script src="/webjars/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
-crossorigin="anonymous"></script>
+crossorigin="anonymous"  th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"></script>
 </head>
 <body>
 
@@ -28,11 +30,23 @@ crossorigin="anonymous"></script>
 							<tr>
 								<th>Id</th>
 								<th>Description</th>
+								<th>View</th>
 							</tr>
 							</thead>
+							<tr th:remove="all">
+								<td>123</td>
+								<td>Tasty goodness 1</td>
+								<td><a href="">view</a></td>
+							</tr>
+							<tr th:remove="all">
+								<td>123</td>
+								<td>Tasty goodness 2</td>
+								<td><a href="">view</a></td>
+							</tr>
 							<tr th:each="recipe: ${recipes}">
 								<td th:text="${recipe.id}">Id</td>
 								<td th:text="${recipe.description}">Description</td>
+								<td><a href="#" th:href="@{'/recipe/show/'+${recipe.id}}">view</a></td>
 							</tr>
 						</table>					
 					</div>
